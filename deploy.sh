@@ -7,7 +7,7 @@ exen() { echo -e "${@/eval /}\n" ; "$@" ; }
 # set ssh key
 echo -e "Set SSH Key\n"
 
-temp=(${CAP_PRIVATE_KEY// / })
+temp=(${CAPISTRANO_PRIVATE_KEY// / })
 
 echo "${temp[0]} ${temp[1]} ${temp[2]} ${temp[3]}" > /root/.ssh/cap_deploy
 
@@ -30,7 +30,7 @@ eval `ssh-agent -s`
 ssh-add /root/.ssh/cap_deploy
 
 
-IFS=',' read -r -a CMDS <<< "${PLUGIN_CAP_CMD}"
+IFS=',' read -r -a CMDS <<< "${PLUGIN_CAPISTRANO_CMD}"
 for CMD in "${CMDS[@]}"; do
    exen eval "$CMD"
 done
